@@ -5,7 +5,10 @@ Demonstration of sfall bug: cannot use temp arrays in procs triggered via signal
 > Tested with sfall 4.3.5 and 4.3.6
 
 ```pascal
-procedure use_temp_arrays begin
+// FIXED! Sort of. Mark this procedure with the `critical` keyword.
+critical procedure use_temp_arrays begin
+    // Temp arrays DO work in here, but you need to know to mark your
+    // procedures which will be invoked via signals as `critical`
     variable arr = temp_array(2, 0);
     arr[0] = 69;
     arr[1] = 420;
